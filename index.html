@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flip Memory Game</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" 
+      type="image/png" 
+      href="Simspons_Characters\pngwing.com (1).ico" />
+  </head>
+  <body>
+    <div class="page-container">
+        <div class="h1-container">
+          <img class="title-logo" src="Simspons_Characters\time-trial-logo2.png" alt="" />
+        </div>
+    <main>
+      <div class="score-container">
+        <div class="score-screen hidden" id="score-screen">
+          <img src="Simspons_Characters\x-close10.png" alt="close button" class="close" id="close">
+          <div class="score-title">SCORE</div>
+          <div id="score-rating-letter" class="">A+</div>
+          <div id="time-score"></div>
+          <button class="play-again" id="play-again">Play again</button>
+        </div>
+      </div>
+      <div id="feedback-main">
+  <div id="feedback-div">
+    <form action="contact.php" method="post" class="form" id="feedback-form1" name="form1" enctype="multipart/form-data">
+
+      <p class="name">
+        <input name="name" type="name" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" required placeholder="Name" id="feedback-name" />
+      </p>
+
+      <p class="email">
+        <input name="email" type="email" class="validate[required,custom[email]] feedback-input" id="feedback-email" placeholder="Email" required />
+      </p>
+
+      <p class="text">
+        <textarea name="comment" type="comment" class="validate[required,length[6,300]] feedback-input" id="feedback-comment" required placeholder="Hey, I really love the site but I believe that you could incorporate some ..... and also get rid of the ...... on the section."></textarea>
+      </p>
+
+      <div class="feedback-submit">
+        <input type="submit" value="SEND" id="feedback-button-blue" />
+        <div class="feedback-ease"></div>
+      </div>
+    </form>
+  </div>
+</div>
+<button id="popup" class="feedback-button" onclick="toggle_visibility()">Feedback</button>
+        <div class="game-container" id="game-container">
+          <div class="bar-and-reset">
+            <div id="stopwatch">Match the cards against the clock</div>
+            <button class="reset remove" id="reset">RESET</button>
+          </div>
+          <div class="game-board" id="game-board">
+            <div class="box b1">
+              <img class="image-class hidden not-solved b1" id="1" src="Simspons_Characters\scientist-new-01.png" alt="" />
+            </div>
+            <div class="box b2">
+              <img class="image-class hidden not-solved" id="2" src="Simspons_Characters\otto-new-01.png" alt="" />
+            </div>
+            <div class="box b3">
+              <img class="image-class hidden not-solved" id="3" src="Simspons_Characters\doctpr-new-01.png" alt="" />
+            </div>
+            <div class="box b4" id="box4">
+              <img class="image-class hidden not-solved" id="4" src="Simspons_Characters\maude-new-01.png" alt="" />
+            </div>
+            <div class="box b5" id="box5">
+              <img class="image-class hidden not-solved" id="5" src="Simspons_Characters\krusty-new-01.png" alt="" />
+            </div>
+            <div class="box b6" id="box6">
+              <img class="image-class hidden not-solved" id="6" src="Simspons_Characters\ned-new-01.png" alt="" />
+            </div>
+            <div class="box b7" id="box7">
+              <img class="image-class hidden not-solved" id="7" src="Simspons_Characters\chief-wigum-NEW-01.png" alt="" />
+            </div>
+            <div class="box b8" id="box8">
+              <img class="image-class hidden not-solved" id="8" src="Simspons_Characters\ralph4-new-01.png" alt="" />
+            </div>
+            <div class="box b9" id="box9">
+              <img class="image-class hidden not-solved" id="9" src="Simspons_Characters\maggie2-new-01.png" alt="" />
+            </div>
+            <div class="box b10" id="box10">
+              <img class="image-class hidden not-solved" id="10" src="Simspons_Characters\maggie2-new-01.png" alt="" />
+            </div>
+            <div class="box b11" id="box11">
+              <img class="image-class hidden not-solved" id="11" src="Simspons_Characters\ralph4-new-01.png" alt="" />
+            </div>
+            <div class="box b12" id="box12">
+              <img class="image-class hidden not-solved" id="12" src="Simspons_Characters\chief-wigum-NEW-01.png" alt="" />
+            </div>
+            <div class="box b13" id="box13">
+              <img class="image-class hidden not-solved" id="13" src="Simspons_Characters\ned-new-01.png" alt="" />
+            </div>
+            <div class="box b14" id="box14">
+              <img class="image-class hidden not-solved" id="14" src="Simspons_Characters\krusty-new-01.png" alt="" />
+            </div>
+            <div class="box b15" id="box15">
+              <img class="image-class hidden not-solved" id="15" src="Simspons_Characters\maude-new-01.png" alt="" />
+            </div>
+            <div class="box b16" id="box16">
+              <img class="image-class hidden not-solved" id="16" src="Simspons_Characters\doctpr-new-01.png" alt="" />
+            </div>
+            <div class="box b17" id="box17">
+              <img class="image-class hidden not-solved" id="17" src="Simspons_Characters\otto-new-01.png" alt="" />
+            </div>
+            <div class="box b18" id="box18">
+              <img class="image-class hidden not-solved" id="18" src="Simspons_Characters\scientist-new-01.png" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <audio id="card-sound" src="card-sound4.mp3"></audio>
+    </main>
+    <!-- javascript -->
+    <script src="jquery-3.5.1.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
