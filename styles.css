@@ -4,7 +4,7 @@
 }
 
 html {
-  background-image: url(Simspons_Characters\simpsons-sky-background.jpg);
+  background-image: url(/Simspons_Characters/simpsons-sky-background.jpg);
   -webkit-text-stroke-width: 1.5px;
   -webkit-text-stroke-color: black;
 }
@@ -51,7 +51,7 @@ main {
 }
 
 div .box {
-  background-image: url(Simspons_Characters\simpsons-donut5.jpg);
+  background-image: url(/Simspons_Characters/simpsons-donut5.jpg);
   background-size: 100%;
   z-index: 0;
 }
