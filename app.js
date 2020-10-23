@@ -4,6 +4,7 @@ const reset = document.getElementById("reset")
 const stopwatch = document.getElementById("stopwatch")
 const playAgain = document.getElementById("play-again")
 const numCards = 18
+let numSolved = 0
 let count = 0
 let idChecker = 0
 let seconds = 0
@@ -25,31 +26,31 @@ shuffle();
 function eachDecisecond() {
     seconds += 0.1
     stopwatch.innerHTML = seconds.toFixed(1) + " s"
-    reset.addEventListener("click", function () {
-        stopwatch.innerHTML = 0
-        resetCards()
-        return
-});
 }
+
+reset.addEventListener("click", function () {
+        resetCards()
+});
 
 // RESET
 
 function resetCards() {
-    $(".box").removeClass("solved").removeClass("targeted").removeClass("hidden").removeClass("disabled")
-    $(".image-class").removeClass("solved").removeClass("targeted").addClass("hidden").addClass("not-solved").removeClass("disabled")
+    $(".box").removeClass("solved").removeClass("targeted").removeClass("hidden").removeClass("disabled").removeClass("fade-out")
+    $(".image-class").removeClass("solved").removeClass("targeted").addClass("hidden").addClass("not-solved").removeClass("disabled").removeClass("fade-out")
     $(".score-screen").addClass("hidden")
     $(".score-screen").removeClass("bounce-in-top")
+    document.getElementById('opaque').style.display='none'
     clearInterval(stopwatchTimer)
     shuffle()
     stopwatch.innerHTML = 0 + " s"
     seconds = 0
     count = 0
+    numSolved = 0
 }
 
 // PLAY AGAIN
 
 playAgain.addEventListener("click", function () {
-    stopwatch.innerHTML = 0 + " s"
     resetCards()
 })
 
@@ -120,35 +121,47 @@ function scoreToRanking() {
 
 arrayBox.forEach(eachBox => {
     eachBox.addEventListener("click", function toggleCard() {
-        eachImage = eachBox.children
-        eachImageId = parseInt(eachImage[0].id, 10)
+        eachImage = eachBox.nextElementSibling
+        eachImageId = parseInt(eachImage.id, 10)
         const cardSound = document.getElementById("card-sound");
         cardSound.play()
         idChecker += eachImageId
+        eachImage.classList.remove("hidden")
+        // Constant set for the number of solved cards. Show the card clicked each time.
 
         // If it's the second reveal in a row, and a matching pair. Set the pair as solved.
         if (count === 1 && idChecker === numCards + 1) {
-            eachImage[0].classList.remove("hidden")
-            eachImage[0].classList.add("targeted")
+            eachImage.classList.add("targeted")
             eachBox.classList.add("targeted")
-            $(".targeted").removeClass("not-solved").addClass("solved")
-            $(".targeted").removeClass("targeted")
+            $(".targeted").addClass("fade-out").removeClass("targeted")
+            setTimeout(function () {
+                $(".fade-out").addClass("solved").removeClass("not-solved").removeClass("fade-out")
+                }, 400);
             count++
+            numSolved++
             idChecker = 0
         }
         // If it's the second reveal in a row, but not a matching pair. Add targets to the selection and do nothing.
         else if (count === 1) {
-            eachImage[0].classList.add("targeted")
-            eachBox.classList.add("targeted")
-             $("img.fade-out").addClass("hidden").removeClass("fade-out")
+            eachImage.classList.add("waiting")
+            eachBox.classList.add("waiting")
+            $("img.fade-out").addClass("hidden").removeClass("fade-out")
+            $(".targeted").addClass("waiting").removeClass("targeted")
+            setTimeout(function () {
+                $("img.waiting").addClass("fade-out").removeClass("waiting")
+                setTimeout(function () {
+                    $(".fade-out").addClass("hidden").removeClass("fade-out")
+                }, 700)
+                }, 500);
             count++
             idChecker = 0
         }
             // If it's the first reveal after revealing 2 cards in a row. Hide the revealed cards and de-target.
         else if (count === 2) {
-            $("img.targeted").addClass("fade-out").removeClass("targeted")
+            $("img.fade-out").addClass("hidden").removeClass("fade-out")
+            $("img.waiting").addClass("hidden").removeClass("fade-out")
             $(".targeted").removeClass("targeted")
-            eachImage[0].classList.add("targeted")
+            eachImage.classList.add("targeted")
             eachBox.classList.add("targeted")
             count = 0
             count++
@@ -156,18 +169,16 @@ arrayBox.forEach(eachBox => {
             // If it's the first reveal of the game. Start the stopwatch.
         else if (count === 0) {
             $(".reset").removeClass("remove")
-            eachImage[0].classList.add("targeted")
+            eachImage.classList.add("targeted")
             eachBox.classList.add("targeted")
             count++
             stopwatchTimer = setInterval(eachDecisecond, 100);
         }
-        // Constant set for the number of solved cards. Show the card clicked each time.
-        const numSolved = document.getElementsByClassName("solved").length
-        eachImage[0].classList.remove("hidden")
-        eachImage[0].classList.remove("fade-out")
+        eachImage.classList.remove("hidden")
         // Win condition. If won stop the stopwatch, show all the cards and disable any interaction.
-        if (numSolved === numCards * 2) {
+        if (numSolved === numCards / 2) {
             const timeScore = document.getElementById("time-score")
+            document.getElementById('opaque').style.display='block'
             clearInterval(stopwatchTimer)
             $(".box").removeClass("solved")
             $(".image-class").removeClass("hidden").removeClass("solved").addClass("not-solved").removeClass("fade-out")
@@ -180,6 +191,7 @@ arrayBox.forEach(eachBox => {
             const closeBtn = document.getElementById("close")
             closeBtn.addEventListener("click", function () {
                 $(".score-screen").addClass("hidden")
+                document.getElementById('opaque').style.display='none'
             })
             
         }

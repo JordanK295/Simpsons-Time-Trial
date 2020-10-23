@@ -1,3 +1,8 @@
+* {
+  box-sizing: border-box;
+  margin: 0px;
+}
+
 @font-face {
   src: url(Fonts/ObelixPro-cyr.ttf);
   font-family: nos;
@@ -39,7 +44,7 @@ main {
 .box {
   border-radius: 10%;
   perspective: 1000px;
-  display: block;
+  /* display: block; */
 }
 .hidden {
   visibility: hidden;
@@ -50,24 +55,31 @@ main {
   animation: fade-out 1s ease-out both;
 }
 
-div .box {
-  background-image: url(Simspons_Characters/simpsons-donut5.jpg);
-  background-size: 100%;
-  z-index: 0;
+.game-board .card-container {
+  position: relative;
 }
-.box img {
+
+div .box {
+  content: url(Simspons_Characters/simpsons-donut6.png);
+  background-size: 100%;
+  z-index: 1;
+  position: relative;
+}
+.image-class {
   max-width: 100%;
   max-height: 100%;
   border-radius: 10%;
   background-color: #fcffdb;
   opacity: 1;
-  z-index: 1;
+  z-index: 2;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
 }
 
-div.solved {
+.solved {
   visibility: hidden;
   opacity: 0;
-  transition: visibility 0s linear 1500ms, opacity 1500ms;
 }
 
 .game-container {
@@ -76,10 +88,6 @@ div.solved {
   flex-wrap: nowrap;
   flex: auto;
   justify-content: space-evenly;
-}
-
-img.targeted {
-  border: solid black 1px;
 }
 
 .disabled {
@@ -94,6 +102,7 @@ img.targeted {
   max-width: 85%;
   margin: auto;
   padding-bottom: 20px;
+  z-index: 2;
 }
 
 #stopwatch {
@@ -101,7 +110,7 @@ img.targeted {
   font-size: 2em;
   text-shadow: -5px 3px 0px black;
   font-size: 3em;
-  min-width: 150px;
+  min-width: 200px;
   border-radius: 15px;
 }
 
@@ -140,6 +149,31 @@ img.targeted {
   -webkit-text-stroke-width: 3px;
   -webkit-text-stroke-color: black;
   letter-spacing: 0px;
+}
+
+* html #opaque {
+  position: absolute;
+}
+
+#opaque {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 998;
+  display: none;
+  background-color: black;
+  filter: alpha(opacity=30);
+  opacity: 0.3;
+}
+
+.score-container {
+  /* height: 100vh;
+  width: 100vw; */
+  background-color: red;
+  position: absolute;
+  z-index: 998;
 }
 
 .bounce-in-top {
@@ -221,6 +255,10 @@ button.play-again:hover {
   -webkit-box-shadow: 0px 0px 50px 0px rgba(0, 255, 0, 0.67);
   -moz-box-shadow: 0px 0px 50px 0px rgba(0, 255, 0, 0.67);
   box-shadow: 0px 0px 50px 0px#ffffff;
+}
+
+*::selection {
+  background: none;
 }
 
 /* KEYFRAMES */
@@ -399,6 +437,7 @@ button.play-again:hover {
     opacity: 0;
   }
 }
+
 @keyframes fade-out {
   0% {
     opacity: 1;
@@ -552,5 +591,19 @@ input:focus,
     margin-left: 0;
     padding-left: 3%;
     padding-right: 3%;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .game-board {
+    max-width: 50%;
+    grid-template-columns: 150px 150px 150px 150px 150px 150px;
+    grid-template-rows: 200px 200px 200px;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .card-container {
+    max-width: 50%;
   }
 }
