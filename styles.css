@@ -44,6 +44,7 @@ main {
 .box {
   border-radius: 10%;
   perspective: 1000px;
+  max-width: 100%;
   /* display: block; */
 }
 .hidden {
@@ -596,14 +597,46 @@ input:focus,
 
 @media only screen and (max-width: 1024px) {
   .game-board {
-    max-width: 50%;
-    grid-template-columns: 150px 150px 150px 150px 150px 150px;
-    grid-template-rows: 200px 200px 200px;
+    grid-template-columns: 112.5px 112.5px 112.5px 112.5px 112.5px 112.5px;
+    grid-template-rows: 150px 150px 150px;
+    justify-content: center;
+    column-count: 6;
+    grid-template-rows: 3;
+    grid-gap: 5px;
   }
 }
 
-@media only screen and (max-width: 1024px) {
-  .card-container {
-    max-width: 50%;
+@media only screen and (max-width: 768px) {
+  .game-board {
+    /* max-width: 50%; */
+    grid-template-columns: 75px 75px 75px 75px 75px 75px;
+    grid-template-rows: 100px 100px 100px;
+    justify-content: center;
+    column-count: 6;
+    grid-template-rows: 3;
+    grid-gap: 5px;
   }
 }
+@media only screen and (max-width: 526px) {
+  .game-board {
+    /* max-width: 50%; */
+    grid-template-columns: 75px 75px 75px;
+    grid-template-rows: 100px 100px 100px 100px 100px 100px;
+    justify-content: center;
+    column-count: 6;
+    grid-template-rows: 3;
+    grid-gap: 5px;
+  }
+}
+
+
+@media only screen and (max-width: 768px) {
+  #stopwatch {
+    font-size: 29px;
+  }
+}
+
+/* @media only screen and (max-width: 1024px) {
+  .card-container {
+  }
+} */
