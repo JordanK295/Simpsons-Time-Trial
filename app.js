@@ -28,11 +28,11 @@ function eachDecisecond() {
     stopwatch.innerHTML = seconds.toFixed(1) + " s"
 }
 
+// RESET
+
 reset.addEventListener("click", function () {
         resetCards()
 });
-
-// RESET
 
 function resetCards() {
     $(".box").removeClass("solved").removeClass("targeted").removeClass("hidden").removeClass("disabled").removeClass("fade-out")
@@ -187,13 +187,12 @@ arrayBox.forEach(eachBox => {
             $(".score-screen").addClass("bounce-in-top").removeClass("hidden")
             timeScore.innerHTML = "time: " + seconds.toFixed(1) + " s"
             scoreToRanking()
-            // setInterval(jellyWobble, 2000);
+            setInterval(jellyWobble, 1500);
             const closeBtn = document.getElementById("close")
             closeBtn.addEventListener("click", function () {
                 $(".score-screen").addClass("hidden")
                 document.getElementById('opaque').style.display='none'
             })
-            
         }
     })
 })
